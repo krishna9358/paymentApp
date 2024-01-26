@@ -6,9 +6,9 @@ features:
 frameworks:
 MongoDB, ExpressJS, ReactJS, NodeJS, TailwindCSS
 
-frontend: 
---> installed tailwind and react , react-router-dom
---> made every file standard and empty
+frontend: <br> 
+--> installed tailwind and react , react-router-dom <br>
+--> made every file standard and empty <br>
 
-backend: 
---> installed mongoose, express, zod, 
+backend: <br>
+--> installed mongoose, express, zod <br>
