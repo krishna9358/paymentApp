@@ -1,14 +1,14 @@
 Created frontend and backend
 
-features:
+<b>features:</b>
 
 
-frameworks:
+<b>frameworks: </b>
 MongoDB, ExpressJS, ReactJS, NodeJS, TailwindCSS
 
-frontend: <br> 
+<b>frontend: <br> </b>
 --> installed tailwind and react , react-router-dom <br>
 --> made every file standard and empty <br>
 
-backend: <br>
+<b>backend: <br></b>
 --> installed mongoose, express, zod <br>
