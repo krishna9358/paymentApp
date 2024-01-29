@@ -1,28 +1,28 @@
-const mongoose  = require("mongoose")
+const mongoose = require("mongoose");
+
 mongoose.connect("mongodb+srv://admin:1rzy7t5zEfdJ8gHW@cluster0.dkfoi6y.mongodb.net/paytm")
 
 const userSchema = new mongoose.Schema({
     username : {
-        type : string, 
-        required : true,
-        minLength : 3, 
-        maxLength : 20,
-        unique  :true,
+        type : String,
+        maxLength : 10,
+        minLength: 5,
+        required : true, 
+        unique : true , 
     },
     password : {
-        type : string, 
-        required : true, 
-        minLength : 6
+        type : String,
+         minLength: 6, 
+         required : true,
     },
     fullname : {
-        type: string,
+        type : String,
         required : true,
         maxLength : 50
-    },
-})
-
-const userModel = mongoose.model("userModel", userSchema)
+    }
+});
+const UserModelName = mongoose.model("User", userSchema);
 
 module.exports = {
-    userModel
+    UserModelName,
 }
