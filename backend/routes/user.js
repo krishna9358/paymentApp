@@ -4,11 +4,13 @@ const zod = require("zod");
 const { UserModelName } = require("../db");
 const JWT_SECRET = require("../config");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+
 
 // using zod for input validation 
  const signupSchema = zod.object({
     username : zod.string(),
-    passowd : zod.string(),
+    password : zod.string(),
     fullname : zod.string(),
  })
 router.post("/signup" , async (req, res) => {
@@ -25,6 +27,7 @@ router.post("/signup" , async (req, res) => {
     const existingUser = await UserModelName.findOne({
         username  : req.body.username,
     });
+    //actually need to add otp system here
     if (existingUser){
         return res.status(411).json({
             message : "email already existed"

@@ -17,3 +17,4 @@ MongoDB, ExpressJS, ReactJS, NodeJS, TailwindCSS
 --> created more routes like user and account routes files in routes folder <br>
 --> install cors, jsonwebtoken, adding cors
 --> created config.js for storing jwt tokens;
+--> adding backend auth routes  in user.js validating input using zod, and creating database.
