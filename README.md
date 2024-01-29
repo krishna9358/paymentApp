@@ -12,4 +12,8 @@ MongoDB, ExpressJS, ReactJS, NodeJS, TailwindCSS
 
 <b>backend: <br></b>
 --> installed mongoose, express, zod <br>
---> created db.js for database and writing schema there.
+--> created db.js for database and writing schema there.<br>
+--> created routes/index.js , and created router which imported in index.js main directory <br>
+--> created more routes like user and account routes files in routes folder <br>
+--> install cors, jsonwebtoken, adding cors
+--> created config.js for storing jwt tokens;
