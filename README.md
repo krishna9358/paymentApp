@@ -12,3 +12,4 @@ MongoDB, ExpressJS, ReactJS, NodeJS, TailwindCSS
 
 <b>backend: <br></b>
 --> installed mongoose, express, zod <br>
+--> created db.js for database and writing schema there.
