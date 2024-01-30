@@ -60,8 +60,8 @@ const signinSchema = zod.object({
 })
 
 router.post("/signin" , async (req, res) => {
-    const {success} = signinSchema.safeParse(req.body);
-    if (!success){
+    const {success} = signinSchema.safeParse(req.body); //const obj =
+    if (!success){ // if (obj.success)
         return res.status(411).json({
             message: "Error while logging in"
         });
