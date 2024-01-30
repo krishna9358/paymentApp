@@ -55,18 +55,34 @@ router.post("/signup" , async (req, res) => {
 
 
 const signinSchema = zod.object({
-    username : zod.string,
-    password : zod.string,
+    username : zod.string().email(),
+    password : zod.string(),
 })
 
-router.post("/signin" , (req, res) => {
-    const body = req.body;
-    const {success} = signupSchema.safeParse(req.body);
+router.post("/signin" , async (req, res) => {
+    const {success} = signinSchema.safeParse(req.body);
     if (!success){
-        return res.json({
+        return res.status(411).json({
             message: "Error while logging in"
-        }).statusCode(411);
+        });
     }
+    const userExist = await UserModelName.findOne({
+        username : req.body.username,
+        password : req.body.password 
+    });
+    
+    if (userExist){
+        const token = jwt.sign({
+            userId : user._id
+        }, JWT_SECRET);
+        res.json ({
+            token : token
+        })
+        return ;
+    }
+    res.status(411).json({
+        message : "Error while logging in"
+    })
 });
 
 
