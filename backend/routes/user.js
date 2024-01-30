@@ -22,7 +22,8 @@ router.post("/signup" , async (req, res) => {
     if (!success){
         return res.json({
             message : "Email is already taken / incorrect inputs"
-        }).status(411);
+        })
+    }
     // checking if user already exist or not 
     const existingUser = await UserModelName.findOne({
         username  : req.body.username,
@@ -50,9 +51,23 @@ router.post("/signup" , async (req, res) => {
         message: "User created successfully",
         token: token
     })
-}});
+});
 
 
-router.post("/signin");
+const signinSchema = zod.object({
+    username : zod.string,
+    password : zod.string,
+})
+
+router.post("/signin" , (req, res) => {
+    const body = req.body;
+    const {success} = signupSchema.safeParse(req.body);
+    if (!success){
+        return res.json({
+            message: "Error while logging in"
+        }).statusCode(411);
+    }
+});
+
 
 module.exports= router;
