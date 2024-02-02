@@ -9,6 +9,7 @@ MongoDB, ExpressJS, ReactJS, NodeJS, TailwindCSS
 <b>frontend: <br> </b>
 --> installed tailwind and react , react-router-dom <br>
 --> made every file standard and empty <br>
+--> Added routes and created pages for those routes. <br>
 
 <b>backend: <br></b>
 --> installed mongoose, express, zod <br>
@@ -19,3 +20,7 @@ MongoDB, ExpressJS, ReactJS, NodeJS, TailwindCSS
 --> created config.js for storing jwt tokens; <br>
 --> adding backend auth routes  in user.js validating input using zod, and creating database for sign up and signin.<br>
 --> created middleware for auth checking, jwt sign, jwt generate, jwt verify, jwt decode <br>
+
+
+
+do step 8 again. 
