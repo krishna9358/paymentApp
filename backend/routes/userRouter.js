@@ -4,6 +4,7 @@ const { User } = require("../db");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = require('../config');
 const router = express.Router();
+const  { authMiddleware } = require("../middleware");
 
 const signupSchema = zod.object({
     username : zod.string().email(), // idealy check if user has given right email 
@@ -19,6 +20,11 @@ const signinSchema = zod.object({
 
 });
 
+const updateSchema = zod.object({
+    password : zod.string().optional(),
+    firstName: zod.string().optional(),
+    lastName: zod.string().optional()
+})
 
 router.post("/signup", async(req, res) => {
     const body = req.body;
@@ -40,6 +46,8 @@ router.post("/signup", async(req, res) => {
     }
 
     // send email otp and verify that too in real world
+    // hash the password while puttting in the database
+    //adding salt / some jibrish to the password before hashing the password
     const dbUser = await User.create(body);
     const token= jwt.sign({
         userId: dbUser._id,
@@ -81,6 +89,44 @@ router.post("/signin", async (req, res) => {
     })
 
 });
+
+router.put("/", authMiddleware, async (req, res) => {
+    const body = req.body;
+    const {success} = updateSchema.safeParse(body);
+    if (!success){
+        return res.json({
+            success : false,
+            message : "Error while updating"
+        }).status(411);
+    }
+    await User.updateOne({ _id: req.userId }, req.body);
+    res.json({
+        message : "User updated successfully"
+    }).status(200);
+})
+
+router.get("/bulk",async (req, res) => {
+    const filter = req.query.filter || " ";
+    const users = await User.find({
+        $or: [{
+            firstName: {
+                "$regex": filter
+            }
+        }, {
+            lastName: {
+                "$regex": filter
+            }
+        }]
+    })
+    res.json({
+        user: users.map(user => ({
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            _id: user._id
+        }))
+    })
+})
 
 
 
