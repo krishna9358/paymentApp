@@ -14,7 +14,7 @@ const signupSchema = zod.object({
 });
 
 const signinSchema = zod.object({
-    username : zod.string(),
+    username : zod.string().email(),
     password : zod.string(),
 
 });
@@ -52,8 +52,33 @@ router.post("/signup", async(req, res) => {
 
 });
 
-router.post("/signin", (req, res) => {
+router.post("/signin", async (req, res) => {
+    const body = req.body;
+    const {success}= signinSchema.safeParse(body);
+    if (!success){
+        return res.json({
+            success : false,
+            message : "Invalid data"
+        }).status(411);
+    }
 
+    const user = await User.findOne({
+        username: req.body.username,
+        password: req.body.password
+    })
+    if(user){
+        const token = jwt.sign({
+            userId: user._id,
+        }, JWT_SECRET);
+        res.json({
+            token: token,
+        })
+        return;
+    }
+
+    res.status(411).json({
+        message: "Error while logging in "
+    })
 
 });
 
