@@ -1,10 +1,11 @@
 const express = require('express');
 const zod = require('zod');
-const { User } = require("../db");
+const { User, Account } = require("../db");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = require('../config');
 const router = express.Router();
 const  { authMiddleware } = require("../middleware");
+
 
 const signupSchema = zod.object({
     username : zod.string().email(), // idealy check if user has given right email 
@@ -49,6 +50,10 @@ router.post("/signup", async(req, res) => {
     // hash the password while puttting in the database
     //adding salt / some jibrish to the password before hashing the password
     const dbUser = await User.create(body);
+    await Account.create({
+        userId : dbUser._id,
+        balance : 1+ Math.random()*10000,
+    })
     const token= jwt.sign({
         userId: dbUser._id,
     }, JWT_SECRET)
