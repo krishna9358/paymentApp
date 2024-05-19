@@ -173,3 +173,5 @@ This project is a basic backend implementation for a payment system using Node.j
 
 
 
+//issues
+1. BACKEND : transaction is not giving error while sending money to own account and also deducting the amount.
