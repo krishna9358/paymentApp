@@ -38,7 +38,7 @@ const accountSchema=  new mongoose.Schema({
         ref : "User"
     },
     balance: {
-        type: number,
+        type: Number,
         required : true,
     }
 })

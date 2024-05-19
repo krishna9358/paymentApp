@@ -40,7 +40,7 @@ router.post("/signup", async(req, res) => {
     const user = User.findOne({
         username : body.username,
     })
-    if (user._id){
+    if (!user._id){
         return res.json({
             messgae : "Email already taken / Incorrect inputs",
         }).status(411);
@@ -85,6 +85,7 @@ router.post("/signin", async (req, res) => {
         }, JWT_SECRET);
         res.json({
             token: token,
+            message: "Successfully logged in"
         })
         return;
     }

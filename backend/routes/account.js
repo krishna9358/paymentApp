@@ -1,19 +1,19 @@
 const express = require('express');
-const { authMiddleware } = require('../middleware');
 const { Account } = require('../db');
-const router = express.Router();
 const mongoose = require('mongoose');
+const { authMiddleware } = require('../middleware');
+const router = express.Router();
 
-route.get ('/balance', authMiddleware , async (req, res) => {
-    const account = await Account.findOne({ userId: req.user._id });
+router.get ('/balance', authMiddleware , async (req, res) => {
+    const account = await Account.findOne({ userId: req.userId });
     res.json({ balance: account.balance });
 })
 
-route.post('/transfer', authMiddleware, async (req, res) => {
+router.post('/transfer', authMiddleware, async (req, res) => {
     const session = await mongoose.startSession();
-    session.startTransaction();
+    session.startTransaction(); 
     const {amount , to } = req.body;
-    const account = await Account.findOne({ userId: req.user._id }).session(session);
+    const account = await Account.findOne({ userId: req.userId }).session(session);
     const recipient = await Account.findOne({ userId: to }).session(session);
 
     if (!account || account.balance < amount){

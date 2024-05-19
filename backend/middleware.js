@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req, res, next) => {
     const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startWith('Bearer ')) {
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(403).json({});
     }  
     const token = authHeader.split(' ')[1];
@@ -13,7 +13,9 @@ const authMiddleware = (req, res, next) => {
         next();
     }
     catch (err) {
-        res.status(403).json({});
+        res.status(403).json({  
+            msg : "error he bhai sahi kar" //error
+        });  
     }
 }
 
