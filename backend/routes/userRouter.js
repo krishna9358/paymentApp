@@ -2,7 +2,7 @@ const express = require('express');
 const zod = require('zod');
 const { User, Account } = require("../db");
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = require('../config');
+const {JWT_SECRET} = require('../config');
 const router = express.Router();
 const  { authMiddleware } = require("../middleware");
 
@@ -40,7 +40,7 @@ router.post("/signup", async(req, res) => {
     const user = User.findOne({
         username : body.username,
     })
-    if (!user._id){
+    if (user._id){
         return res.json({
             messgae : "Email already taken / Incorrect inputs",
         }).status(411);

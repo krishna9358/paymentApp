@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
 require('dotenv').config();
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+mongoose.connect(process.env.MONGODB_URI);
+
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -14,11 +16,11 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+        required: true, 
         minLength: 6
     },
     firstName: {
-        type: String,
+        type: String, 
         required: true,
         trim: true,
         maxLength: 50
