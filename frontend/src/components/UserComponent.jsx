@@ -6,12 +6,16 @@ import { useNavigate } from "react-router-dom";
 export const UserComponent = () => {
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState("");
+    const [loggedInUserId, setLoggedInUserId] = useState(null);
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
+                const token = localStorage.getItem("token");
+                const decode = jwt_decode(token)
+                setLoggedInUserId(decode.id)
                 const response = await axios.get(`http://localhost:3000/api/v1/user/bulk?filter=${filter}`);
-                setUsers(response.data.user);
+                setUsers(response.data.user.filter( user => user._id !== loggedInUserId));
             } catch (error) {
                 console.error("Error fetching users:", error);
             }
