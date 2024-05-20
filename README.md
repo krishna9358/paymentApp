@@ -56,5 +56,8 @@ This project is a full-stack web application that provides user management funct
 ## Contributing
 Contributions are welcome! Please feel free to submit a pull request.
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Issues
+1. Links redirect 
+2. if logged, redirect to dashboard //protectedrOUTES
+3. logout
+4. after successful payment, redirect to dashboard.
